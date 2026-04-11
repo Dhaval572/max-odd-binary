@@ -395,7 +395,7 @@ def bench_d(name, func_body):
             "  dchar[] result;\n"
             "  auto sw = StopWatch(AutoStart.yes);\n"
             "  foreach(i; 0 .. n)\n"
-            "    result = maximumOddBinary(input);\n"
+            "    result = maximumOddBinary(input.dup);\n"
             "  sw.stop();\n"
             "  double dur = sw.peek.total!`nsecs`;\n"
             "  writeln(dur / (1e9 * n));\n"
