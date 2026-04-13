@@ -3249,7 +3249,7 @@ def main():
         default_size = 1_000
         results = cached.get(default_size) or next(iter(cached.values()))
         generate_chart(results, ROOT / "img" / "benchmark_all.png")
-        results_filtered = [r for r in results if r["name"] not in ("TinyAPL", "Kap")]
+        results_filtered = [r for r in results if r["name"] not in ("TinyAPL", "Kap", "Smalltalk")]
         generate_chart(results_filtered, ROOT / "img" / "benchmark_no_tinyapl.png")
         generate_html(cached, ROOT / "benchmark.html")
         return
@@ -3306,7 +3306,7 @@ def main():
 
     print("\nGenerating outputs...")
     generate_chart(results, ROOT / "img" / "benchmark_all.png")
-    results_filtered = [r for r in results if r["name"] not in ("TinyAPL", "Kap")]
+    results_filtered = [r for r in results if r["name"] not in ("TinyAPL", "Kap", "Smalltalk")]
     generate_chart(results_filtered, ROOT / "img" / "benchmark_no_tinyapl.png")
     generate_html(all_results, ROOT / "benchmark.html")
 
