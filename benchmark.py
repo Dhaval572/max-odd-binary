@@ -349,7 +349,7 @@ def bench_c(name, func_body):
             "    result = maximum_odd_binary(input);\n"
             "  }\n"
             "  double end = get_time();\n"
-            "  printf(\"%f\\n\", (end - start) / n);\n"
+            "  printf(\"%.15e\\n\", (end - start) / n);\n"
             "  if (result) free(result);\n"
             "  free(input);\n"
             "  return 0;\n"
@@ -388,6 +388,7 @@ def bench_cpp(name, func_body):
             "#include <algorithm>\n"
             "#include <chrono>\n"
             "#include <cstring>\n"
+            "#include <iomanip>\n"
             "#include <iostream>\n"
             "#include <string>\n\n"
             "auto maximum_odd_binary(std::string s) -> std::string {\n"
@@ -403,7 +404,8 @@ def bench_cpp(name, func_body):
             "  for (int i = 0; i < n; ++i)\n"
             "    result = maximum_odd_binary(input);\n"
             "  auto end = std::chrono::high_resolution_clock::now();\n"
-            "  std::cout << std::chrono::duration<double>(end - start).count() / n\n"
+            "  std::cout << std::setprecision(15) << std::scientific\n"
+            "            << std::chrono::duration<double>(end - start).count() / n\n"
             "            << '\\n';\n"
             "  if (result.empty()) return 1;\n"
             "}\n"
@@ -3063,7 +3065,8 @@ def run_benchmarks_for_size(input_len, log_scripts=False, lang_filter=None):
     results = []
     for sol in SOLUTIONS:
         if lang_filter and not any(
-            f.lower() in sol["name"].lower() or f.lower() in sol["code"].lower()
+            f.lower() == sol["name"].lower()
+            or f.lower() == sol["code"].lower()
             for f in lang_filter
         ):
             continue
